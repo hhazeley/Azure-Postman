@@ -1,0 +1,231 @@
+{
+	"info": {
+		"name": "Azure - Management",
+		"description": "Getting started with managing Azure via Azure REST API using Postman.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get - Azure Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearerToken\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientid}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientsecret}}",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "https://management.azure.com/",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/:tenantid/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						":tenantid",
+						"oauth2",
+						"token"
+					],
+					"variable": [
+						{
+							"key": "tenantid",
+							"value": "{{tenantid}}"
+						}
+					]
+				},
+				"description": "Post to get azure token for Postman App"
+			},
+			"response": []
+		},
+		{
+			"name": "Get - Subscription",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/:subscriptionid?api-version=2014-04-01",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						":subscriptionid"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2014-04-01"
+						}
+					],
+					"variable": [
+						{
+							"key": "subscriptionid",
+							"value": "{{subid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get - VMSS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/:subscriptionid/resourceGroups/:resourcegroup/providers/Microsoft.Compute/virtualMachineScaleSets/:vmssname?api-version=2018-06-01",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						":subscriptionid",
+						"resourceGroups",
+						":resourcegroup",
+						"providers",
+						"Microsoft.Compute",
+						"virtualMachineScaleSets",
+						":vmssname"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-06-01"
+						}
+					],
+					"variable": [
+						{
+							"key": "subscriptionid",
+							"value": "{{subid}}"
+						},
+						{
+							"key": "resourcegroup",
+							"value": ""
+						},
+						{
+							"key": "vmssname",
+							"value": ""
+						}
+					]
+				},
+				"description": "Get VMSS information"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
