@@ -24,7 +24,7 @@ This repository contains steps/information that can be used to connect [Postman]
 
 ### Result
 
-![Result 1](https://i.imgur.com/ZHmhNeC.png)
+[Result 1](https://i.imgur.com/ZHmhNeC.png)
 
 ![Result 1](https://i.imgur.com/ZHmhNeC.png)
 
