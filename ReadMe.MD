@@ -24,14 +24,18 @@ This repository contains steps/information that can be used to connect [Postman]
 
 ### Result
 
-![Result 1](https://i.imgur.com/ZHmhNeC.png)
+[Result 1](https://i.imgur.com/ZHmhNeC.png)
 
 ![Result 2](https://i.imgur.com/pgVpZpC.png)
 
 [1]:https://www.getpostman.com/
 
+<<<<<<< HEAD
 ### Video of Setup
 
 [![YouTube Video](https://img.youtube.com/vi/2bfgeBKRxl4/0.jpg)](http://www.youtube.com/watch?v=2bfgeBKRxl4)
 
 ## Done!!
+=======
+## Done!!
+>>>>>>> 2b9dd54b713a900f80807c8a495189fad70fb291
