@@ -1,0 +1,211 @@
+{
+	"info": {
+		"name": "Azure Diagnostics",
+		"description": "This collection has calls to logon to an Azure Environment, get diagnostics settings of a virtual machine and put (set) diagnostic settings of a virtual machine ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get - Azure Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"bearerToken\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientid}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientsecret}}",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "https://management.azure.com/",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/:tenantid/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						":tenantid",
+						"oauth2",
+						"token"
+					],
+					"variable": [
+						{
+							"key": "tenantid",
+							"value": "{{tenantid}}"
+						}
+					]
+				},
+				"description": "Post to get azure token for Postman App"
+			},
+			"response": []
+		},
+		{
+			"name": "Get - DiagnosticsExtension",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/:subscriptionid/resourceGroups/:resourcegroup/providers/Microsoft.Compute/virtualMachines/:vmName/extensions/Microsoft.Insights.VMDiagnosticsSettings?api-version=2018-10-01",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						":subscriptionid",
+						"resourceGroups",
+						":resourcegroup",
+						"providers",
+						"Microsoft.Compute",
+						"virtualMachines",
+						":vmName",
+						"extensions",
+						"Microsoft.Insights.VMDiagnosticsSettings"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-10-01"
+						}
+					],
+					"variable": [
+						{
+							"key": "subscriptionid",
+							"value": ""
+						},
+						{
+							"key": "resourcegroup",
+							"value": ""
+						},
+						{
+							"key": "vmName",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put - DiagnosticsExtension",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearerToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/:subscriptionid/resourceGroups/:resourcegroup/providers/Microsoft.Compute/virtualMachines/:vmName/extensions/Microsoft.Insights.VMDiagnosticsSettings?api-version=2018-10-01",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						":subscriptionid",
+						"resourceGroups",
+						":resourcegroup",
+						"providers",
+						"Microsoft.Compute",
+						"virtualMachines",
+						":vmName",
+						"extensions",
+						"Microsoft.Insights.VMDiagnosticsSettings"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2018-10-01"
+						}
+					],
+					"variable": [
+						{
+							"key": "subscriptionid",
+							"value": ""
+						},
+						{
+							"key": "resourcegroup",
+							"value": ""
+						},
+						{
+							"key": "vmName",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -15,6 +15,9 @@ This repository contains steps/information that can be used to connect [Postman]
     - Subscription ID
 - From Postman, import [**Azure - Management Collection**](./Azure_Management.postman_collection.json) template
 ![Import Collection](https://i.imgur.com/xmS15W2.png "Import Collection")
+
+    **You can load the [**Azure - Diagnostics Collection**](./Azure_Diagnostics.postman_collection.json) template if you are working on diagnostic scenario.**
+
 - From Postman, import [**Azure Environment**](Azure.postman_environment.json) template
 ![Import Environment](https://i.imgur.com/NlrVozZ.png "Import Environment") 
 + Update **Postman** - **Azure Environment** with information from Azure Environment
